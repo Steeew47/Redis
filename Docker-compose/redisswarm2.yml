@@ -1,0 +1,187 @@
+version: '3'
+
+
+networks:
+    swarm_network:
+        driver: overlay
+
+
+services:
+  redis-1:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == adam-HP-280-G1-MT]
+
+      
+    ports:
+      - "7001:7001"
+
+      
+    networks:
+      swarm_network:
+    network_mode: "host"
+
+
+
+
+  redis-2:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == adam-HP-280-G1-MT]
+
+    ports:
+      - "7002:7002"
+
+
+    networks:
+      swarm_network:
+    network_mode: "host"
+
+
+
+  redis-3:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == node1]
+
+    ports:
+      - "7003:7003"
+
+
+
+    networks:
+      swarm_network:
+    network_mode: "host"
+
+
+
+
+  redis-4:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == node1]
+
+    ports:
+      - "7004:7004"
+
+
+    networks:
+      swarm_network:
+    network_mode: "host"
+
+
+
+  redis-5:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == node2]
+
+    ports:
+      - "7005:7005"
+
+
+
+    networks:
+      swarm_network:
+    network_mode: "host"
+
+
+
+  redis-6:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.hostname == node2]
+
+    ports:
+      - "7006:7006"
+
+
+    networks:
+      swarm_network:
+    network_mode: "host"
+

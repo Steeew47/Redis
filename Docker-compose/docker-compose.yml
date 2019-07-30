@@ -1,0 +1,96 @@
+version: '2'
+
+services:
+  Redis-1:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-1
+    container_name: Redis-1
+    ports:
+      - "7001:7001"
+    volumes: 
+      - /home/adam/Redis/master1/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-2:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-2
+    container_name: Redis-2
+    ports:
+      - "7002:7002"
+    volumes: 
+      - /home/adam/Redis/master2/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-3:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-3
+    container_name: Redis-3
+    ports:
+      - "7003:7003"
+    volumes: 
+      - /home/adam/Redis/master3/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-4:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-4
+    container_name: Redis-4
+    ports:
+      - "7004:7004"
+    volumes: 
+      - /home/adam/Redis/slave1/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-5:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-5
+    container_name: Redis-5
+    ports:
+      - "7005:7005"
+    volumes: 
+      - /home/adam/Redis/slave2/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-6:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-6
+    container_name: Redis-6
+    ports:
+      - "7006:7006"
+    volumes: 
+      - /home/adam/Redis/slave3/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+
+  Redis-7:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-7
+    container_name: Redis-7
+    ports:
+      - "7007:7007"
+    volumes: 
+      - /home/adam/Redis/master4/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"
+
+  Redis-8:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-8
+    container_name: Redis-8
+    ports:
+      - "7008:7008"
+    volumes: 
+      - /home/adam/Redis/slave4/redis.conf:/usr/local/etc/redis/redis.conf
+    network_mode: "host"

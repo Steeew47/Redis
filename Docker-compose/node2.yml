@@ -1,0 +1,45 @@
+version: '3.7'
+
+
+
+services:
+
+  redis-1:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32768"
+      - "--cluster-announce-bus-port 32769"
+      - "--protected-mode no"
+
+
+
+    ports:
+      - "32768:6379"
+      - "32769:16379"
+
+
+
+  redis-2:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32770"
+      - "--cluster-announce-bus-port 32771"
+      - "--protected-mode no"
+
+
+
+    ports:
+      - "32770:6379"
+      - "32771:16379"

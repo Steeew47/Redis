@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+  rednet:
+
+
+services:
+  Redis-1:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-1
+    container_name: Redis-1
+    ports:
+      - "7001:7001"
+    volumes: 
+      - /home/adam/Redis/master1/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - rednet
+
+
+  Redis-2:
+    image: redis
+    command: redis-server /usr/local/etc/redis/redis.conf
+    hostname: Redis-2
+    container_name: Redis-2
+    ports:
+      - "7002:7002"
+    volumes: 
+      - /home/adam/Redis/master2/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - rednet

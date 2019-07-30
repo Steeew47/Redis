@@ -1,0 +1,27 @@
+version: '3'
+
+
+services:
+  redis:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7003"
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 3
+    networks:
+      hostnet: {}
+    ports:
+      - "7003:7003"
+
+networks:
+  hostnet:
+    external:
+      name: red-net
+    

@@ -1,0 +1,172 @@
+version: '3.7'
+
+
+networks:
+  redis:
+    external:
+      name: "redis-network"
+
+
+services:
+
+  redis-1:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32768"
+      - "--cluster-announce-bus-port 32769"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.111"
+
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      redis:
+
+    ports:
+      - "32768:6379"
+      - "32769:16379"
+
+
+
+  redis-2:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32770"
+      - "--cluster-announce-bus-port 32771"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.111"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      redis:
+
+    ports:
+      - "32770:6379"
+      - "32771:16379"
+
+
+  redis-3:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32772"
+      - "--cluster-announce-bus-port 32773"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.112"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node2]
+
+    networks:
+      redis:
+
+    ports:
+      - "32772:6379"
+      - "32773:16379"
+
+
+  redis-4:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32774"
+      - "--cluster-announce-bus-port 32775"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.112"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node2]
+
+    networks:
+      redis:
+
+    ports:
+      - "32774:6379"
+      - "32775:16379"
+
+
+  redis-5:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32776"
+      - "--cluster-announce-bus-port 32777"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.113"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node3]
+
+    networks:
+      redis:
+
+    ports:
+      - "32776:6379"
+      - "32777:16379"
+
+  redis-6:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32778"
+      - "--cluster-announce-bus-port 32779"
+      - "--protected-mode no"
+      - "--cluster-announce-ip 192.168.99.113"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node3]
+
+    networks:
+      redis:
+
+    ports:
+      - "32778:6379"
+      - "32779:16379"

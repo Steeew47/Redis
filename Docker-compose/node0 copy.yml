@@ -1,0 +1,74 @@
+version: '3.7'
+
+
+networks:
+  redis:
+    external:
+      name: "redis-network"
+
+
+
+services:
+
+  redis-1:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32768"
+      - "--cluster-announce-bus-port 32769"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--cluster-announce-ip 10.0.1.10"
+      - "--bind 0.0.0.0"
+
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      redis:
+        ipv4_address: 10.0.1.10
+   
+ 
+    ports:
+      - "32768:6379"
+      - "32769:16379"
+
+
+
+  redis-2:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--cluster-announce-port 32770"
+      - "--cluster-announce-bus-port 32771"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--cluster-announce-ip 10.0.1.11"
+      - "--bind 0.0.0.0"
+
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      redis:
+        ipv4_address: 10.0.1.11
+ 
+    ports:
+      - "32770:6379"
+      - "32771:16379"

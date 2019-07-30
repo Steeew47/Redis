@@ -1,0 +1,31 @@
+version: '3'
+
+networks:
+    swarm_network:
+        driver: overlay
+
+
+
+services:
+  redis:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--bind 0.0.0.0"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 6
+    networks:
+      swarm_network:
+
+
+
+  

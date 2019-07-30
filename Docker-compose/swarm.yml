@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  default:
+    external:
+      name: red-net
+
+
+
+services:
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - default

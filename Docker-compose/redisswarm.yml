@@ -1,0 +1,168 @@
+version: '3.7'
+
+
+networks:
+  redis:
+    external:
+      name: "redis-network"
+
+
+
+services:
+  redis-1:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 6379"
+      - "--port 16379"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      - redis
+ 
+    ports:
+      - "7001:7001"
+
+
+  redis-2:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7002"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+      
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node1]
+
+    networks:
+      
+      - ingress
+
+    ports:
+      - "7002:7002"
+
+
+  redis-3:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7003"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node2]
+
+    ports:
+      - "7003:7003"
+
+    networks:
+      
+      - ingress
+
+  redis-4:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7004"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+
+    ports:
+      - "7004:7004"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node2]
+
+    networks:
+      
+      - ingress  
+
+
+
+
+  redis-5:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7005"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node3]
+
+    ports:
+      - "7005:7005"
+
+    networks:
+      
+      - ingress
+  
+
+  redis-6:
+    image: redis
+    command:
+      - "redis-server"
+      - "--cluster-enabled yes"
+      - "--cluster-config-file nodes.conf"
+      - "--cluster-node-timeout 5000"
+      - "--appendonly yes"
+      - "--port 7006"
+      - "--protected-mode no"
+      - "--repl-diskless-sync yes"
+      - "--bind 0.0.0.0"
+
+    ports:
+      - "7006:7006"
+
+    networks:
+      
+      - ingress   
+    
+    deploy:
+      mode: global
+      placement:
+        constraints: [node.hostname == node3]
